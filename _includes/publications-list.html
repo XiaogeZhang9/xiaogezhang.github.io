@@ -1,0 +1,42 @@
+{% include base_path %}
+
+{% for post in site.publications reversed %}
+  {% assign details_url = post.url | prepend: base_path %}
+  {% assign paper_href = post.paperurl | default: details_url %}
+  {% assign project_href = post.projecturl | default: details_url %}
+  {% assign code_href = post.codeurl | default: details_url %}
+  {% assign teaser_src = post.teaser | default: 'profile.jpg' %}
+  <div class="xp-pub-item">
+    <div class="xp-pub-thumb-wrap">
+      <a href="{{ paper_href }}" rel="permalink">
+        <div class="xp-pub-thumb">
+          <img
+            src="{{ teaser_src | prepend: '/images/' | prepend: base_path }}"
+            alt="{{ post.title }}"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <div class="xp-pub-fallback">
+            {{ teaser_src }}
+          </div>
+        </div>
+      </a>
+    </div>
+    <div style="flex:1;">
+      <h3 class="xp-pub-title">
+        <a href="{{ paper_href }}" rel="permalink">{{ post.title }}</a>
+      </h3>
+      {% if post.authors %}
+        <p class="xp-pub-authors">{{ post.authors | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+      {% endif %}
+      <p class="xp-pub-venue"><i>{{ post.venue }}</i>, {{ post.date | date: "%Y" }}</p>
+      <p class="xp-pub-links">
+        <a href="{{ paper_href }}">paper</a> /
+        <a href="{{ project_href }}">project</a> /
+        <a href="{{ code_href }}">code</a>
+      </p>
+      {% if post.excerpt %}
+        <p class="xp-pub-excerpt">{{ post.excerpt }}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
