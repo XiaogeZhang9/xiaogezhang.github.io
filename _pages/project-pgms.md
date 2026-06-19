@@ -38,7 +38,6 @@ author_profile: false
             <h2 class="col-md-12 text-center">
                 PGMS: Pyramidal Gaussian Mixture Splatting for 3DGS Compression<br>
                 <small>
-                    Submitted to NeurIPS 2026
                 </small>
             </h2>
         </div>
